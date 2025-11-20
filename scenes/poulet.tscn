@@ -1,0 +1,120 @@
+[gd_scene load_steps=15 format=3 uid="uid://cgysjw48hu2wa"]
+
+[ext_resource type="Script" uid="uid://bm0gt0o34ftbr" path="res://scripts/poulet.gd" id="1_pffk7"]
+[ext_resource type="Texture2D" uid="uid://j8wrak5teb1f" path="res://assets/Poulet.png" id="1_x2k1n"]
+[ext_resource type="Texture2D" uid="uid://chqbnlmrabbvu" path="res://assets/icone_e_beige_bis_grise.png" id="3_mkb41"]
+[ext_resource type="FontFile" uid="uid://36dkvi7gqp8x" path="res://fonts/monogram-extended.ttf" id="4_pc7dl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pffk7"]
+atlas = ExtResource("1_x2k1n")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkb41"]
+atlas = ExtResource("1_x2k1n")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pc7dl"]
+atlas = ExtResource("1_x2k1n")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mi7im"]
+atlas = ExtResource("1_x2k1n")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfljg"]
+atlas = ExtResource("1_x2k1n")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7184g"]
+atlas = ExtResource("1_x2k1n")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ykub"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pffk7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkb41")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pc7dl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mi7im")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfljg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7184g")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6k1j5"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mkb41"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pc7dl"]
+font = ExtResource("4_pc7dl")
+
+[node name="Poulet" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_pffk7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7ykub")
+animation = &"walk"
+autoplay = "idle"
+offset = Vector2(0, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -4)
+shape = SubResource("CircleShape2D_6k1j5")
+
+[node name="ZoneCollecte" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneCollecte"]
+position = Vector2(-1, -3)
+shape = SubResource("CircleShape2D_mkb41")
+debug_color = Color(0.8673699, 0.14593557, 0.7861148, 0.41960785)
+
+[node name="TimerChangementDirection" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="IconeInteraction" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, -19)
+texture = ExtResource("3_mkb41")
+
+[node name="Label" type="Label" parent="IconeInteraction"]
+custom_minimum_size = Vector2(16, 16)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -17.0
+offset_right = 6.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "e"
+label_settings = SubResource("LabelSettings_pc7dl")
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="ZoneCollecte" to="." method="_on_zone_collecte_body_entered"]
+[connection signal="body_exited" from="ZoneCollecte" to="." method="_on_zone_collecte_body_exited"]
+[connection signal="timeout" from="TimerChangementDirection" to="." method="_on_timer_changement_direction_timeout"]

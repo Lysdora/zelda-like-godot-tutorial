@@ -1,0 +1,190 @@
+[gd_scene load_steps=16 format=3 uid="uid://gitpncrbrpek"]
+
+[ext_resource type="Texture2D" uid="uid://sp5270s60wfd" path="res://ui/assets/inventaire_tuto.png" id="1_f048j"]
+[ext_resource type="Theme" uid="uid://63b7g2t6pyee" path="res://ui/themes/panel_container_fond.tres" id="2_1u8fv"]
+[ext_resource type="Script" uid="uid://brehjuy5fb022" path="res://ui/scripts/journal_de_quete.gd" id="2_xbkoe"]
+[ext_resource type="Texture2D" uid="uid://ijclxhfgjfog" path="res://ui/assets/icone_quete_poulet.png" id="3_3i8ig"]
+[ext_resource type="Texture2D" uid="uid://b6b1dmie2x17a" path="res://ui/assets/icone_ombre_malefique.png" id="4_5eaw5"]
+[ext_resource type="Texture2D" uid="uid://djcbh2a2bkqpc" path="res://ui/assets/cle_donjon_tuto.png" id="5_xbkoe"]
+[ext_resource type="Texture2D" uid="uid://cu7oo2virn7iy" path="res://ui/assets/canne_peche_tuto.png" id="6_fef28"]
+[ext_resource type="Texture2D" uid="uid://b15slekgdor6f" path="res://ui/assets/godot_ami_tuto.png" id="7_f6mhv"]
+[ext_resource type="Texture2D" uid="uid://ceckb11rkxtw7" path="res://ui/assets/bouton_fermer_dialogue_normal.png" id="9_f6mhv"]
+[ext_resource type="Texture2D" uid="uid://pfy6pqhsiph6" path="res://ui/assets/bouton_fermer_dialogue_hover.png" id="10_1lqaq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5eaw5"]
+font_color = Color(0.24705882, 0.15686275, 0.19607843, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ky4nr"]
+texture = ExtResource("1_f048j")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="Theme" id="Theme_8r8hr"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_ky4nr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5eaw5"]
+texture = ExtResource("1_f048j")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[sub_resource type="Theme" id="Theme_xbkoe"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_5eaw5")
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="JournalDeQuete" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -252.0
+offset_top = -139.0
+offset_right = 252.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_f048j")
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
+script = ExtResource("2_xbkoe")
+
+[node name="Background" type="PanelContainer" parent="JournalDeQuete"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_1u8fv")
+
+[node name="Label" type="Label" parent="JournalDeQuete"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -89.0
+offset_top = 9.0
+offset_right = 77.0
+offset_bottom = 37.0
+grow_horizontal = 2
+text = "Journal de quete"
+label_settings = SubResource("LabelSettings_5eaw5")
+vertical_alignment = 1
+
+[node name="BoutonQuitterJournal" type="TextureButton" parent="JournalDeQuete"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -19.0
+offset_top = -6.0
+offset_right = 13.0
+offset_bottom = 26.0
+grow_horizontal = 0
+texture_normal = ExtResource("9_f6mhv")
+texture_hover = ExtResource("10_1lqaq")
+stretch_mode = 4
+
+[node name="PanelListeQuete" type="PanelContainer" parent="JournalDeQuete"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -236.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_8r8hr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="JournalDeQuete/PanelListeQuete"]
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="JournalDeQuete/PanelListeQuete/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 5
+item_0/text = "Sauve les poulets"
+item_0/icon = ExtResource("3_3i8ig")
+item_1/text = "L'Ombre Malefique"
+item_1/icon = ExtResource("4_5eaw5")
+item_2/text = "Le Donjon"
+item_2/icon = ExtResource("5_xbkoe")
+item_3/text = "La Peche"
+item_3/icon = ExtResource("6_fef28")
+item_4/text = "Un ami poutr la vie"
+item_4/icon = ExtResource("7_f6mhv")
+
+[node name="PanelDetailQuete" type="PanelContainer" parent="JournalDeQuete"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xbkoe")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="JournalDeQuete/PanelDetailQuete"]
+layout_mode = 2
+
+[node name="LabelTitreQuete" type="Label" parent="JournalDeQuete/PanelDetailQuete/VBoxContainer"]
+layout_mode = 2
+text = "Les Poulets de Bilbo"
+horizontal_alignment = 1
+
+[node name="Description" type="PanelContainer" parent="JournalDeQuete/PanelDetailQuete/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_8r8hr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="JournalDeQuete/PanelDetailQuete/VBoxContainer/Description"]
+layout_mode = 2
+
+[node name="TexteQuete" type="RichTextLabel" parent="JournalDeQuete/PanelDetailQuete/VBoxContainer/Description/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "C'est un test jkjkjkjmlmlmlml
+kljkjkjkjkjluuiuifdfdgmlkkm
+jkkjlfiioiogpopopoiklmmkmkm
+jkjkhkhkuuiuiouououoklklmlm
+jkjkjoiioilklklkmmùopiojklkmkm
+jlkkmlmlmlmlmppioiuiijlklmlllm
+C'est un test jkjkjkjmlmlmlml
+kljkjkjkjkjluuiuifdfdgmlkkm
+"
+
+[node name="IconeQuete" type="TextureRect" parent="JournalDeQuete/PanelDetailQuete/VBoxContainer/Description/HBoxContainer"]
+custom_minimum_size = Vector2(100, 128)
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("3_3i8ig")
+stretch_mode = 5
+
+[node name="BoutonQuitterQuete" type="TextureButton" parent="JournalDeQuete"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -19.0
+offset_top = 253.0
+offset_right = 13.0
+offset_bottom = 285.0
+grow_horizontal = 0
+texture_normal = ExtResource("9_f6mhv")
+texture_hover = ExtResource("10_1lqaq")
+stretch_mode = 4
+
+[connection signal="pressed" from="JournalDeQuete/BoutonQuitterJournal" to="JournalDeQuete" method="_on_bouton_quitter_journal_pressed"]
+[connection signal="item_selected" from="JournalDeQuete/PanelListeQuete/VBoxContainer/ItemList" to="JournalDeQuete" method="_on_item_list_item_selected"]
+[connection signal="pressed" from="JournalDeQuete/BoutonQuitterQuete" to="JournalDeQuete" method="_on_bouton_quitter_quete_pressed"]

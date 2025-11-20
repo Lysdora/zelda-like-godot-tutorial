@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bk13rttd3a006"]
+
+[ext_resource type="Texture2D" uid="uid://riemw4fif7d" path="res://assets/Bilbo_idle.png" id="1_0h1ob"]
+[ext_resource type="Script" uid="uid://brktbvpqldcpr" path="res://scripts/bilbo.gd" id="1_lunjn"]
+[ext_resource type="Texture2D" uid="uid://qypyle4yi642" path="res://assets/IconeDeQuete.png" id="2_ijqoy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ijqoy"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lunjn"]
+radius = 33.01515
+
+[node name="Bilbo" type="StaticBody2D"]
+script = ExtResource("1_lunjn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0h1ob")
+offset = Vector2(0, -12)
+hframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_ijqoy")
+
+[node name="ZoneInteraction" type="Area2D" parent="."]
+
+[node name="IconeInteraction" type="Sprite2D" parent="ZoneInteraction"]
+texture = ExtResource("2_ijqoy")
+offset = Vector2(0, -28)
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneInteraction"]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_lunjn")
+debug_color = Color(0.9249532, 4.2740106e-05, 0.6800028, 0.41960785)
+
+[connection signal="body_entered" from="ZoneInteraction" to="." method="_on_zone_interaction_body_entered"]
+[connection signal="body_exited" from="ZoneInteraction" to="." method="_on_zone_interaction_body_exited"]
