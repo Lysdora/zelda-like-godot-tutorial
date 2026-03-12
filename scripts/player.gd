@@ -8,9 +8,14 @@ var offset = 20
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var camera: Camera2D = $Camera2D
 
-
+# Variable pour miner
+var roche_proche = null
+var est_en_train_de_miner: bool = false
 
 func _physics_process(_delta: float) -> void:
+	if  est_en_train_de_miner:
+		#Arrete toi de marcher si le Player mine !
+		return
 	var move_input = Vector2.ZERO
 	
 	if Input.is_action_pressed("move_down"):
@@ -27,7 +32,7 @@ func _physics_process(_delta: float) -> void:
 		last_direction = "right"
 	
 	velocity = move_input * speed
-	
+
 	if move_input != Vector2.ZERO:
 		# Si le personnage bouge
 		animated_sprite_2d.play("walk_" + last_direction)
@@ -50,6 +55,20 @@ func player_clamp():
 		camera.limit_bottom - offset
 	)
 	
+# Fonction pour detection du clic pour miner
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if roche_proche != null and not est_en_train_de_miner:
+				est_en_train_de_miner = true
+				# on jour l'animation de minage
+				animated_sprite_2d.play("miner_" + last_direction)
+				print("Je mine !")
 	
 	
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if est_en_train_de_miner:
+		est_en_train_de_miner = false

@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://di3cg5s3mg7oh" path="res://assets/stone.png" id="1_bwmij"]
 [ext_resource type="Script" uid="uid://chkgdfafelnn2" path="res://scripts/roche.gd" id="1_w47o4"]
 [ext_resource type="Resource" uid="uid://3ughsx6u7hgp" path="res://data/roche/mine_pierre.tres" id="2_7ax8n"]
+[ext_resource type="AudioStream" uid="uid://5b223y046inn" path="res://audio/sfx/240801__ryanconway__pickaxe-mining-stone.wav" id="4_y13jl"]
+[ext_resource type="AudioStream" uid="uid://gpjrlmwhm11c" path="res://audio/sfx/freesound_community-rock-smash-6304 (mp3cut.net) (1).wav" id="5_bhp4p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w47o4"]
 atlas = ExtResource("1_bwmij")
@@ -10,6 +12,8 @@ region = Rect2(1, 49, 14, 13)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ax8n"]
 radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y13jl"]
 
 [node name="Roche" type="StaticBody2D" unique_id=1679206802]
 script = ExtResource("1_w47o4")
@@ -20,3 +24,18 @@ texture = SubResource("AtlasTexture_w47o4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1987724688]
 shape = SubResource("CircleShape2D_7ax8n")
+
+[node name="ZoneMinage" type="Area2D" parent="." unique_id=1205006880]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneMinage" unique_id=927534952]
+shape = SubResource("CircleShape2D_y13jl")
+debug_color = Color(0.83575916, 0.21893921, 0.7911034, 0.41960785)
+
+[node name="SonMinage" type="AudioStreamPlayer2D" parent="." unique_id=102039326]
+stream = ExtResource("4_y13jl")
+
+[node name="SonDestruction" type="AudioStreamPlayer2D" parent="." unique_id=2082022100]
+stream = ExtResource("5_bhp4p")
+
+[connection signal="body_entered" from="ZoneMinage" to="." method="_on_zone_minage_body_entered"]
+[connection signal="body_exited" from="ZoneMinage" to="." method="_on_zone_minage_body_exited"]

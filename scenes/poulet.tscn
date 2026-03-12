@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cgysjw48hu2wa"]
+[gd_scene format=3 uid="uid://cgysjw48hu2wa"]
 
 [ext_resource type="Script" uid="uid://bm0gt0o34ftbr" path="res://scripts/poulet.gd" id="1_pffk7"]
 [ext_resource type="Texture2D" uid="uid://j8wrak5teb1f" path="res://assets/Poulet.png" id="1_x2k1n"]
@@ -68,37 +68,37 @@ radius = 5.0
 [sub_resource type="LabelSettings" id="LabelSettings_pc7dl"]
 font = ExtResource("4_pc7dl")
 
-[node name="Poulet" type="CharacterBody2D"]
+[node name="Poulet" type="CharacterBody2D" unique_id=1180631485]
 collision_layer = 2
 script = ExtResource("1_pffk7")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=865711295]
 sprite_frames = SubResource("SpriteFrames_7ykub")
 animation = &"walk"
 autoplay = "idle"
 offset = Vector2(0, -5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=217977808]
 position = Vector2(-1, -4)
 shape = SubResource("CircleShape2D_6k1j5")
 
-[node name="ZoneCollecte" type="Area2D" parent="."]
+[node name="ZoneCollecte" type="Area2D" parent="." unique_id=1116137608]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneCollecte"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneCollecte" unique_id=595625875]
 position = Vector2(-1, -3)
 shape = SubResource("CircleShape2D_mkb41")
 debug_color = Color(0.8673699, 0.14593557, 0.7861148, 0.41960785)
 
-[node name="TimerChangementDirection" type="Timer" parent="."]
+[node name="TimerChangementDirection" type="Timer" parent="." unique_id=843741367]
 wait_time = 2.0
 autostart = true
 
-[node name="IconeInteraction" type="Sprite2D" parent="."]
+[node name="IconeInteraction" type="Sprite2D" parent="." unique_id=1210147061]
 visible = false
 position = Vector2(-1, -19)
 texture = ExtResource("3_mkb41")
 
-[node name="Label" type="Label" parent="IconeInteraction"]
+[node name="Label" type="Label" parent="IconeInteraction" unique_id=731533523]
 custom_minimum_size = Vector2(16, 16)
 anchors_preset = 8
 anchor_left = 0.5
