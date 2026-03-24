@@ -1,0 +1,13 @@
+[gd_resource type="Theme" format=3 uid="uid://63b7g2t6pyee"]
+
+[ext_resource type="Texture2D" uid="uid://drl27rtw3p4ts" path="res://ui/assets/inventaire_tuto_bg.png" id="1_68cqb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1u8fv"]
+texture = ExtResource("1_68cqb")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+
+[resource]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_1u8fv")

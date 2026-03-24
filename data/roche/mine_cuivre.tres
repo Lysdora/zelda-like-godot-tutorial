@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="RocheData" format=3 uid="uid://d10d4kalfkb5h"]
+
+[ext_resource type="Script" uid="uid://ba21qx8noopfq" path="res://scripts/minerai_data.gd" id="1_0xkif"]
+[ext_resource type="Script" uid="uid://be2te1xf2hsig" path="res://scripts/roche_data.gd" id="1_7ihb0"]
+[ext_resource type="Texture2D" uid="uid://dv3luewcsnkpm" path="res://assets/sprite_minerai/copper.png" id="2_57p07"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddlp5"]
+atlas = ExtResource("2_57p07")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_gk0qx"]
+script = ExtResource("1_0xkif")
+nom = "Cuivre"
+texture = SubResource("AtlasTexture_ddlp5")
+metadata/_custom_type_script = "uid://ba21qx8noopfq"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xkif"]
+atlas = ExtResource("2_57p07")
+region = Rect2(32, 17, 15, 13)
+
+[resource]
+script = ExtResource("1_7ihb0")
+texture = SubResource("AtlasTexture_0xkif")
+vie_max = 5
+rarete = 50
+minerai_data = SubResource("Resource_gk0qx")
+metadata/_custom_type_script = "uid://be2te1xf2hsig"

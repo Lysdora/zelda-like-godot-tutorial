@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="RocheData" format=3 uid="uid://3ughsx6u7hgp"]
+
+[ext_resource type="Script" uid="uid://ba21qx8noopfq" path="res://scripts/minerai_data.gd" id="1_4qi5t"]
+[ext_resource type="Script" uid="uid://be2te1xf2hsig" path="res://scripts/roche_data.gd" id="1_iu113"]
+[ext_resource type="Texture2D" uid="uid://di3cg5s3mg7oh" path="res://assets/sprite_minerai/stone.png" id="2_uhu1y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orfg3"]
+atlas = ExtResource("2_uhu1y")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_isbcu"]
+script = ExtResource("1_4qi5t")
+texture = SubResource("AtlasTexture_orfg3")
+metadata/_custom_type_script = "uid://ba21qx8noopfq"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qi5t"]
+atlas = ExtResource("2_uhu1y")
+region = Rect2(1, 49, 14, 13)
+
+[resource]
+script = ExtResource("1_iu113")
+texture = SubResource("AtlasTexture_4qi5t")
+vie_max = 3
+rarete = 75
+minerai_data = SubResource("Resource_isbcu")
+metadata/_custom_type_script = "uid://be2te1xf2hsig"

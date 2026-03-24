@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dqg0e8huv62c"]
+
+[ext_resource type="Script" uid="uid://blms7tkr6jbvi" path="res://scenes/pnj/pnj.gd" id="1_h5ica"]
+[ext_resource type="Texture2D" uid="uid://df3xeuaxusaye" path="res://scenes/pnj/assets/ombre1.png" id="2_h5ica"]
+[ext_resource type="Texture2D" uid="uid://qypyle4yi642" path="res://assets/sprite_icone/IconeDeQuete.png" id="3_hm87i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ijqoy"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lunjn"]
+radius = 34.0147
+
+[node name="OmbreMalefique" type="StaticBody2D"]
+script = ExtResource("1_h5ica")
+nom_pnj = "Ombre Malefique"
+texte_dialogue = "Je n'ai pas le droit de vous parler"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_h5ica")
+offset = Vector2(0, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_ijqoy")
+
+[node name="ZoneInteraction" type="Area2D" parent="."]
+
+[node name="IconeInteraction" type="Sprite2D" parent="ZoneInteraction"]
+position = Vector2(0, -8)
+texture = ExtResource("3_hm87i")
+offset = Vector2(0, -28)
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneInteraction"]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_lunjn")
+debug_color = Color(0.9249532, 4.2740106e-05, 0.6800028, 0.41960785)
+
+[connection signal="body_entered" from="ZoneInteraction" to="." method="_on_zone_interaction_body_entered"]
+[connection signal="body_exited" from="ZoneInteraction" to="." method="_on_zone_interaction_body_exited"]
