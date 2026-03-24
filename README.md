@@ -1,77 +1,52 @@
-# 🗒️ Zelda-like Godot Tutorial - Complete Series
+# Partie 09 — Des cailloux magiques ! Custom Resources ⛏️
 
-> Série de tutoriels complets pour créer un RPG Zelda-like pixel art avec Godot 4 par **Lysdora Craft**
+> Série **Zelda-like Godot** par [Lysdora Craft](https://www.youtube.com/@LysdoraCraft)
 
-![Godot 4.5](https://img.shields.io/badge/Godot-4.5+-blue?logo=godotengine)
-![License MIT](https://img.shields.io/badge/license-MIT-green)
-![YouTube](https://img.shields.io/badge/YouTube-Lysdora%20Craft-red?logo=youtube)
+▶️ [Voir la vidéo](https://www.youtube.com/watch?v=onTXq2PL4MI)
 
 ---
 
-## 📺 Chaîne YouTube
+## Ce que tu apprends
 
-🎬 **[Lysdora Craft - Tutoriels Godot](https://www.youtube.com/@LysdoraCraft)**
-
-Apprends à créer ton propre jeu d'aventure RPG façon Zelda, étape par étape, avec des explications claires et bienveillantes ! 🎮💖
-
----
-
-## 🎯 À propos de cette série
-
-Cette série de tutoriels YouTube te guide dans la création d'un RPG pixel art complet avec Godot Engine. Tu apprendras à créer un jeu avec :
-- Un personnage jouable avec animations
-- Des PNJ (Personnages Non-Joueurs) avec IA
-- Un système de quêtes complet
-- Une carte avec tilemap et collisions
-- Et bien plus encore ! ⚔️
+- Comprendre ce qu'est une **Custom Resource** dans Godot
+- Créer une ressource personnalisée avec `extends Resource` et `class_name`
+- Déclarer des propriétés exportées (`@export`) pour les configurer dans l'inspecteur
+- Créer des fichiers `.tres` (pierre, cuivre…) qui réutilisent le même script
+- Lier une ressource à une scène via `@export var data: RocheData`
+- Lire les données de la ressource dans `_ready()` pour configurer la scène
 
 ---
 
-## 🗂️ Comment utiliser ce repository ?
+## Code clé
 
-### 📦 Structure du projet
+```gdscript
+# roche_data.gd
+extends Resource
+class_name RocheData
 
-Ce repository contient **plusieurs parties** du tutoriel, organisées en **branches** :
+@export var texture: Texture2D
+@export var vie_max: int
+@export var rarete: int
+```
 
-- **`main`** → Code de la **partie la plus récente** (actuellement partie 8)
-- **`partie-08`** → Journal de quêtes *(branche figée)*
-- **`partie-07`** → PNJ avec intelligence artificielle *(branche figée)*
-- **`partie-06`** → *Animation TWEEN* *(branche figée)*
-- **`partie-05`** → *Un PNJ dans ton jeu* *(branche figée)*
+```gdscript
+# roche.gd
+@export var data: RocheData
+var vie: int
 
-Chaque branche représente l'état final du code à la fin de l'épisode correspondant.
-
----
-
-## 🚀 Télécharger une partie spécifique
-
-### Option 1 : Télécharger le ZIP via GitHub
-
-1. Va sur **[ce repository](https://github.com/Lysdora/zelda-like-godot-tutorial)**
-2. Clique sur le menu déroulant **"main"** (en haut à gauche)
-3. Choisis la branche que tu veux (ex: `partie-08`)
-4. Clique sur le bouton vert **"Code"** → **"Download ZIP"**
-5. Décompresse le ZIP
-6. Ouvre le projet dans Godot Engine
-
-### Option 2 : Cloner avec Git
-```bash
-# Clone la branche de la partie 8
-git clone -b partie-08 https://github.com/Lysdora/zelda-like-godot-tutorial.git
-
-# Ou clone la partie 7
-git clone -b partie-07 https://github.com/Lysdora/zelda-like-godot-tutorial.git
+func _ready() -> void:
+    vie = data.vie_max
+    sprite_2d.texture = data.texture
 ```
 
 ---
 
-## 📚 Liste des parties
+## Exercices suggérés
 
-| Partie | Titre | Lien vidéo | Branche |
-|--------|-------|------------|---------|
-| 5️⃣ | **Un PNJ dans ton jeu** | [▶️ Voir la vidéo](https://www.youtube.com/watch?v=nlPhfjMJohw) | [`partie-05`](../../tree/partie-05) |
-| 6️⃣ | **Animation TWEEN** | [▶️ Voir la vidéo](https://www.youtube.com/watch?v=eHGu-qMhC4c) | [`partie-06`](../../tree/partie-06) |
-| 7️⃣ | **PNJ avec IA** | [▶️ Voir la vidéo](https://www.youtube.com/watch?v=CXW521WiT9k) | [`partie-07`](../../tree/partie-07) |
-| 8️⃣ | **Journal de quêtes** | [▶️ Voir la vidéo](#) | [`partie-08`](../../tree/partie-08) |
+1. Crée une nouvelle ressource `mine_fer.tres` avec ses propres valeurs
+2. Ajoute un champ `nom: String` à `RocheData` et affiche-le dans la console au démarrage
+3. Fais varier la taille de la collision en fonction de la `rarete` de la roche
 
-> 💡 **Note :** Le lien de la partie 8 sera ajouté une fois la vidéo publiée sur YouTube !
+---
+
+*← [Retour au projet principal](https://github.com/Lysdora/zelda-like-godot-tutorial)*
