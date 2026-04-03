@@ -85,7 +85,7 @@ git clone -b partie-11 https://github.com/Lysdora/zelda-like-godot-tutorial.git
 | 9️⃣ | **Des cailloux magiques ! (Custom Resources)** | [▶️ Voir la vidéo](https://www.youtube.com/watch?v=onTXq2PL4MI) | [`partie-09`](../../tree/partie-09) |
 | 🔟 | **Miner en 2D ! Clic souris & animations** | [▶️ Voir la vidéo](https://youtu.be/s92vdEEWpB8) | [`partie-10`](../../tree/partie-10) |
 | 1️⃣1️⃣ | **Looter le minerai !** | [▶️ Voir la vidéo](https://youtu.be/bRgYff9D2Zw) | [`partie-11`](../../tree/partie-11) |
-| 1️⃣2️⃣ | **Auto-tile et nouvelle map** | ▶️ Lien bientôt | [`partie-12`](../../tree/partie-12) |
+| 1️⃣2️⃣ | **Auto-tile et nouvelle map** | [▶️ Voir la vidéo](https://youtu.be/Nauj_m97vq0)  | [`partie-12`](../../tree/partie-12) |
 
 ---
 
