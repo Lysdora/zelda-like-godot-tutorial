@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c6m3oly8bi68g"]
+
+[ext_resource type="Script" uid="uid://d1lv0830uq463" path="res://scripts/minerai_sol.gd" id="1_416c2"]
+[ext_resource type="AudioStream" uid="uid://bxb3qyuo4glf6" path="res://audio/sfx/loot_roche.wav" id="2_p2mq2"]
+[ext_resource type="FontFile" uid="uid://j3afe42ujqbk" path="res://fonts/monogram.ttf" id="3_fdad1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_01fkd"]
+radius = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ihhqw"]
+font = ExtResource("3_fdad1")
+font_color = Color(1, 0.9019608, 0, 1)
+outline_size = 2
+outline_color = Color(0.47843137, 0.26666668, 0, 1)
+
+[node name="MineraiSol" type="Area2D" unique_id=1495746717]
+script = ExtResource("1_416c2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1600021037]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=776178740]
+shape = SubResource("CircleShape2D_01fkd")
+
+[node name="SonRamassage" type="AudioStreamPlayer2D" parent="." unique_id=1430915616]
+stream = ExtResource("2_p2mq2")
+
+[node name="LabelRamassage" type="Label" parent="." unique_id=1847395236]
+offset_right = 48.0
+offset_bottom = 16.0
+text = "+1 Cuivre"
+label_settings = SubResource("LabelSettings_ihhqw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

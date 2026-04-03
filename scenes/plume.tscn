@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bo75t55k02dn"]
+
+[ext_resource type="Script" uid="uid://bbikjoxrkqbe6" path="res://scripts/plume.gd" id="1_s6nwn"]
+[ext_resource type="Texture2D" uid="uid://bseuxp2to361u" path="res://assets/Plume.png" id="2_34neq"]
+
+[node name="Plume" type="Node2D" unique_id=568951271]
+script = ExtResource("1_s6nwn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1961065708]
+texture = ExtResource("2_34neq")
