@@ -26,6 +26,7 @@ Cette série de tutoriels YouTube te guide dans la création d'un RPG pixel art 
 - Un système de ressources personnalisées (Custom Resources)
 - Un système de minage avec minerais
 - Un système de loot avec effets visuels
+- Des maps avec auto-tiling (Terrains)
 - Et bien plus encore ! ⚔️
 
 ---
@@ -36,7 +37,8 @@ Cette série de tutoriels YouTube te guide dans la création d'un RPG pixel art 
 
 Ce repository contient **plusieurs parties** du tutoriel, organisées en **branches** :
 
-- **`main`** → Code de la **partie la plus récente** (actuellement partie 11)
+- **`main`** → Code de la **partie la plus récente** (actuellement partie 12)
+- **`partie-12`** → Auto-tile et nouvelle map *(branche figée)*
 - **`partie-11`** → Looter le minerai ! *(branche figée)*
 - **`partie-10`** → Miner en 2D ! Clic souris & animations *(branche figée)*
 - **`partie-09`** → Custom Resources & Minerais *(branche figée)*
@@ -55,7 +57,7 @@ Chaque branche représente l'état final du code à la fin de l'épisode corresp
 
 1. Va sur **[ce repository](https://github.com/Lysdora/zelda-like-godot-tutorial)**
 2. Clique sur le menu déroulant **"main"** (en haut à gauche)
-3. Choisis la branche que tu veux (ex: `partie-11`)
+3. Choisis la branche que tu veux (ex: `partie-12`)
 4. Clique sur le bouton vert **"Code"** → **"Download ZIP"**
 5. Décompresse le ZIP
 6. Ouvre le projet dans Godot Engine
@@ -63,11 +65,11 @@ Chaque branche représente l'état final du code à la fin de l'épisode corresp
 ### Option 2 : Cloner avec Git
 
 ```bash
-# Clone la branche de la partie 11
-git clone -b partie-11 https://github.com/Lysdora/zelda-like-godot-tutorial.git
+# Clone la branche de la partie 12
+git clone -b partie-12 https://github.com/Lysdora/zelda-like-godot-tutorial.git
 
-# Ou clone la partie 10
-git clone -b partie-10 https://github.com/Lysdora/zelda-like-godot-tutorial.git
+# Ou clone la partie 11
+git clone -b partie-11 https://github.com/Lysdora/zelda-like-godot-tutorial.git
 ```
 
 ---
@@ -83,10 +85,71 @@ git clone -b partie-10 https://github.com/Lysdora/zelda-like-godot-tutorial.git
 | 9️⃣ | **Des cailloux magiques ! (Custom Resources)** | [▶️ Voir la vidéo](https://www.youtube.com/watch?v=onTXq2PL4MI) | [`partie-09`](../../tree/partie-09) |
 | 🔟 | **Miner en 2D ! Clic souris & animations** | [▶️ Voir la vidéo](https://youtu.be/s92vdEEWpB8) | [`partie-10`](../../tree/partie-10) |
 | 1️⃣1️⃣ | **Looter le minerai !** | [▶️ Voir la vidéo](https://youtu.be/bRgYff9D2Zw) | [`partie-11`](../../tree/partie-11) |
+| 1️⃣2️⃣ | **Auto-tile et nouvelle map** | ▶️ Lien bientôt | [`partie-12`](../../tree/partie-12) |
 
 ---
 
-## 🆕 Partie 11 — Looter le minerai ! ⛏️💎
+## 🆕 Partie 12 — Auto-tile et nouvelle map 🗺️
+
+Dans cette partie, on apprend à utiliser le système de **Terrains (auto-tiling)** de Godot 4 pour créer une toute nouvelle scène : la **Caverne** ! On agrandit le monde du jeu avec une map bien plus grande et plus travaillée.
+
+### 🎓 Ce que tu apprends
+
+- Comprendre le système de **Terrains** dans les TileSets de Godot 4
+- Configurer un **Terrain Set** et ses **Terrains** (peering bits)
+- Utiliser l'outil **Terrains** pour peindre automatiquement les bonnes tuiles
+- Organiser une map avec **plusieurs TileMapLayers** (Ground, GroundDecor, Chemin, Plaine, Objects)
+- Créer une **nouvelle scène** (Caverne) avec son propre tileset
+- Placer des **objets décoratifs** avec collisions via TileMap
+- Utiliser le **Y-Sorting** pour le bon ordre d'affichage des éléments
+- Configurer une **caméra indépendante** qui suit le joueur dans la nouvelle map
+
+### 📁 Nouveaux fichiers et modifications
+
+```
+Tiles/
+├── ground_caverne.tres          # 🆕 TileSet sol de la caverne (avec terrain auto-tile)
+├── plaine_caverne.tres          # 🆕 TileSet plaine/murs caverne (avec terrain + collisions)
+assets/tilesets/caverne-donjon/
+├── tiles.png                    # 🆕 Tileset principal caverne
+├── objects.png                  # 🆕 Objets décoratifs (stalagmites, cristaux...)
+├── objets/                      # 🆕 Rails, échelles, pièges, lampes...
+├── objets_animé/                # 🆕 Torches, coffres, portes, entrées (pour les prochaines parties !)
+scenes/
+├── caverne.tscn                 # 🆕 Scène complète de la caverne
+scripts/
+├── camera_2d.gd                 # ✏️ Caméra qui suit le joueur (réutilisée)
+```
+
+### 🔑 Concepts clés — Terrains (Auto-tile)
+
+Le système de Terrains dans Godot 4 permet de peindre des tuiles et le moteur choisit automatiquement la bonne variante (coin, bord, centre...) selon les tuiles voisines. Plus besoin de placer chaque tuile à la main !
+
+**Comment ça marche :**
+1. Dans le TileSet, on crée un **Terrain Set** (ex: mode "Match Corners and Sides")
+2. On crée un **Terrain** dans ce set (ex: "chemin", "mur"...)
+3. On assigne les **peering bits** à chaque tuile (quels côtés/coins correspondent)
+4. On peint avec l'outil Terrains dans l'éditeur TileMap
+
+### 🗺️ Structure de la scène Caverne
+
+```
+Caverne (Node2D)
+├── Maps (Node2D)
+│   ├── Ground (TileMapLayer)        → Sol de base
+│   ├── GroundDecor (TileMapLayer)   → Décorations au sol
+│   ├── Chemin (TileMapLayer)        → Chemins avec auto-tile
+│   ├── Plaine (TileMapLayer)        → Murs et zones avec collisions
+│   └── Plaine2 (TileMapLayer)       → Couche supplémentaire
+├── Camera2D                          → Suit le joueur
+└── YSorting (Node2D, y_sort)
+    ├── Objects (TileMapLayer)        → Objets décoratifs (stalagmites, cristaux)
+    └── Player                        → Le joueur
+```
+
+---
+
+## 1️⃣1️⃣ Partie 11 — Looter le minerai ! ⛏️💎
 
 Dans cette partie, on finalise le système de minage en faisant apparaître un **loot de minerai** quand la roche est détruite, avec des effets visuels et sonores !
 
@@ -234,9 +297,9 @@ func _on_zone_minage_body_exited(body: Node2D) -> void:
 | Paramètre | Valeur |
 |-----------|--------|
 | Viewport | 320×180 |
-| Window override | 1280×720 |
+| Window override | 1920×1080 |
 | Scale | 0.5 |
-| Stretch mode | viewport / keep |
+| Stretch mode | canvas_items |
 | Texture filter | Nearest |
 
 ---
@@ -252,6 +315,8 @@ func _on_zone_minage_body_exited(body: Node2D) -> void:
 | Le loot n'apparaît pas | Vérifie que `minerai_sol_scene` est bien assigné dans l'inspecteur de la roche |
 | Le minerai ne se ramasse pas | Vérifie que le Player est dans le **groupe "Player"** et que le `body_entered` est connecté |
 | Le journal ne s'affiche pas | Vérifie que `ui.tscn` est bien ajouté dans `foret.tscn` |
+| L'auto-tile ne fonctionne pas | Vérifie que les **peering bits** sont bien configurés dans le TileSet |
+| Les collisions ne marchent pas dans la caverne | Vérifie que le **physics_layer** est bien activé sur le TileSet |
 
 ---
 
