@@ -1,5 +1,11 @@
 # 🗒️ Zelda-like Godot Tutorial - Complete Series
 > Série de tutoriels complets pour créer un RPG Zelda-like pixel art avec Godot 4 par **Lysdora Craft**
+>
+> 
+> Message aux abonnées Youtube
+> Apres une mauvaise manipulation, en essayant de supprimer une ancienne chaine, j'ai accidentellement aussi supprimé ma chaine LysdoraCraft le 04/04/2026 vers 13h00
+> J'ai contacté  Youtube qui ne peut rien faire pour moi
+> Je suis degoutée :(
 
 ![Godot 4.6](https://img.shields.io/badge/Godot-4.6+-blue?logo=godotengine)
 ![License MIT](https://img.shields.io/badge/license-MIT-green)
